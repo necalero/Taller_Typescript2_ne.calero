@@ -1,8 +1,11 @@
 import { Course } from './Course.js';
-
 import { dataCourses } from './dataCourses.js';
+import { Student } from './Student.js';
+import { dataStudent } from './dataStudent.js';
 
+let studentTbody: HTMLElement = document.getElementById('student_data')!;
 let coursesTbody: HTMLElement = document.getElementById('courses')!;
+let studentName: HTMLElement = document.getElementById('student_name')!;
 const btnfilterByName: HTMLElement = document.getElementById("button-filterByName")!;
 const inputSearchBox: HTMLInputElement = <HTMLInputElement> document.getElementById("search-box")!;
 const totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
@@ -10,6 +13,7 @@ const totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
 
 btnfilterByName.onclick = () => applyFilterByName();
 
+renderStudent(dataStudent);
 renderCoursesInTable(dataCourses);
 
 totalCreditElm.innerHTML = ` ${getTotalCredits(dataCourses)}`
@@ -26,6 +30,32 @@ function renderCoursesInTable(courses: Course[]): void {
   });
 }
  
+function renderStudent(student: Student): void{
+  console.log('Desplegando estudiante');
+  let h1element = document.createElement("h1");
+  h1element.innerHTML = `${student.nombre}`;
+  studentName.appendChild(h1element);
+  let trElement = document.createElement("tr");
+  trElement.innerHTML = `<td>Codigo</td>
+                         <td>${student.codigo}</td>`;
+  studentTbody.appendChild(trElement);
+  trElement = document.createElement("tr");
+  trElement.innerHTML = `<td>Cedula</td>
+                         <td>${student.cedula}</td>`;
+  studentTbody.appendChild(trElement);
+  trElement = document.createElement("tr");
+  trElement.innerHTML = `<td>Edad</td>
+                         <td>${student.edad}</td>`;
+  studentTbody.appendChild(trElement);
+  trElement = document.createElement("tr");
+  trElement.innerHTML = `<td>Direccion</td>
+                         <td>${student.direccion}</td>`;
+  studentTbody.appendChild(trElement);
+  trElement = document.createElement("tr");
+  trElement.innerHTML = `<td>Telefono</td>
+                         <td>${student.telefono}</td>`;
+  studentTbody.appendChild(trElement);
+}
 
  
 
