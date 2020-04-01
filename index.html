@@ -22,8 +22,8 @@
     <div class="container">
         <div class="row">
 
-            <div class="col" >
-                <div >
+            <div class="col">
+                <div>
                     <h1 id="student_name"></h1>
                     <img class="img-fluid max-width: 100% height: auto" src="./cale.jfif" alt="Avatar">`
 
@@ -33,7 +33,7 @@
                         <table class="table ">
                             <h3>Datos Personales</h3>
                             <tbody id="student_data">
-                                
+
                             </tbody>
                         </table>
 
@@ -53,15 +53,44 @@
                                     <input type="text" class="form-control" id="search-box"
                                         placeholder="Filtrar por nombre">
                                 </div>
-                                <div class="col">
-                                    <button type="button" id="button-filterByName"
-                                        class="btn btn-success">Aplicar</button>
+                                
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="exampleFormControlSelect1">
+                                            Creditos minimos:
+                                        </label>
+                                        <select class="form-control minimo" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleFormControlSelect1">
+                                            Creditos maximos:
+                                        </label>
+                                        <select class="form-control maximo" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </div>
+                                    
                                 </div>
+                                <div class="row" >
+                                    <div class="col" >
+                                        <button type="button" id="button-filterByName"
+                                            class="btn btn-success">Aplicar</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </form>
-                        <div class = "top_margin">
+                        <div class="top_margin">
                             <table class="table table-bordered">
-                                
+
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Curso</th>
@@ -70,21 +99,21 @@
                                     </tr>
                                 </thead>
                                 <tbody id="courses">
-    
+
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <div class="center">
                             <h2>
                                 Total Creditos:
                                 <h2 id="total-credits">
-                                 
+
                                 </h2>
                             </h2>
                         </div>
-                        
-                        
+
+
                     </div>
                 </div>
 
