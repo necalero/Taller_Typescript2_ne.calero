@@ -14,8 +14,7 @@ const totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
 
 
 btnfilterByName.onclick = () => {
-  applyFilterByName();
-  filtrarPorCreditos();
+  filtrar();
 }
 
 renderStudent(dataStudent);
@@ -23,6 +22,13 @@ renderCoursesInTable(dataCourses);
 
 totalCreditElm.innerHTML = ` ${getTotalCredits(dataCourses)}`
 
+
+function filtrar() : void
+{
+  let cursosFilPorNomb : Course[] = applyFilterByName(dataCourses);
+  let cursosFiltrados : Course[] = filtrarPorCreditos(cursosFilPorNomb);
+  renderCoursesInTable(cursosFiltrados);
+}
 
 function renderCoursesInTable(courses: Course[]): void {
   console.log('Desplegando cursos');
@@ -64,20 +70,20 @@ function renderStudent(student: Student): void {
 
 
 
-function applyFilterByName() {
+function applyFilterByName(cursos: Course[]): Course[] {
   let text = inputSearchBox.value;
   text = (text == null) ? '' : text;
   clearCoursesInTable();
-  let coursesFiltered: Course[] = searchCourseByName(text, dataCourses);
-  renderCoursesInTable(coursesFiltered);
+  let coursesFiltered: Course[] = searchCourseByName(text, cursos);
+  return coursesFiltered;
 }
 
-function filtrarPorCreditos() {
+function filtrarPorCreditos(cursos: Course[]): Course[] {
   let min: any = minCredits.value;
   let max: any = maxCredits.value;
   clearCoursesInTable();
-  let coursesFiltered: Course[] = searchCoursesWithinCredits(min, max, dataCourses);
-  renderCoursesInTable(coursesFiltered);
+  let coursesFiltered: Course[] = searchCoursesWithinCredits(min, max, cursos);
+  return coursesFiltered;
 }
 
 function searchCoursesWithinCredits(min: number, max: number, courses: Course[]) {

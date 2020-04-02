@@ -9,12 +9,16 @@ var minCredits = document.getElementById("exampleFormControlSelect1_min");
 var maxCredits = document.getElementById("exampleFormControlSelect1_max");
 var totalCreditElm = document.getElementById("total-credits");
 btnfilterByName.onclick = function () {
-    applyFilterByName();
-    filtrarPorCreditos();
+    filtrar();
 };
 renderStudent(dataStudent);
 renderCoursesInTable(dataCourses);
 totalCreditElm.innerHTML = " " + getTotalCredits(dataCourses);
+function filtrar() {
+    var cursosFilPorNomb = applyFilterByName(dataCourses);
+    var cursosFiltrados = filtrarPorCreditos(cursosFilPorNomb);
+    renderCoursesInTable(cursosFiltrados);
+}
 function renderCoursesInTable(courses) {
     console.log('Desplegando cursos');
     courses.forEach(function (course) {
@@ -44,19 +48,19 @@ function renderStudent(student) {
     trElement.innerHTML = "<td>Telefono</td>\n                         <td>" + student.telefono + "</td>";
     studentTbody.appendChild(trElement);
 }
-function applyFilterByName() {
+function applyFilterByName(cursos) {
     var text = inputSearchBox.value;
     text = (text == null) ? '' : text;
     clearCoursesInTable();
-    var coursesFiltered = searchCourseByName(text, dataCourses);
-    renderCoursesInTable(coursesFiltered);
+    var coursesFiltered = searchCourseByName(text, cursos);
+    return coursesFiltered;
 }
-function filtrarPorCreditos() {
+function filtrarPorCreditos(cursos) {
     var min = minCredits.value;
     var max = maxCredits.value;
     clearCoursesInTable();
-    var coursesFiltered = searchCoursesWithinCredits(min, max, dataCourses);
-    renderCoursesInTable(coursesFiltered);
+    var coursesFiltered = searchCoursesWithinCredits(min, max, cursos);
+    return coursesFiltered;
 }
 function searchCoursesWithinCredits(min, max, courses) {
     var cursosARetornar = [];
