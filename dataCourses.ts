@@ -7,5 +7,8 @@ export const dataCourses = [
   new Course("TI en las Organizaciones", "Andrea Herrera", 3),
   new Course("Lenguajes & Maquinas", "Silvia Takahashi", 3),
   new Course("Pensamiento Computacional", "Pablo Figueroa", 2),
-  new Course("Calculo Integral", "Jean Carlos Cortissoz", 3)
+  new Course("Calculo Integral", "Jean Carlos Cortissoz", 3),
+  new Course("Curso experimental 1", "NA", 4),
+  new Course("Curso experimental 2", "NA", 5),
+  new Course("Curso experimental 3", "NA", 6)
 ]

@@ -7,11 +7,16 @@ let studentTbody: HTMLElement = document.getElementById('student_data')!;
 let coursesTbody: HTMLElement = document.getElementById('courses')!;
 let studentName: HTMLElement = document.getElementById('student_name')!;
 const btnfilterByName: HTMLElement = document.getElementById("button-filterByName")!;
-const inputSearchBox: HTMLInputElement = <HTMLInputElement> document.getElementById("search-box")!;
+const inputSearchBox: HTMLInputElement = <HTMLInputElement>document.getElementById("search-box")!;
+const minCredits: HTMLOptionElement = <HTMLOptionElement> document.getElementById("exampleFormControlSelect1_min")!;
+const maxCredits: HTMLOptionElement = <HTMLOptionElement> document.getElementById("exampleFormControlSelect1_max")!;
 const totalCreditElm: HTMLElement = document.getElementById("total-credits")!;
 
 
-btnfilterByName.onclick = () => applyFilterByName();
+btnfilterByName.onclick = () => {
+  applyFilterByName();
+  filtrarPorCreditos();
+}
 
 renderStudent(dataStudent);
 renderCoursesInTable(dataCourses);
@@ -29,8 +34,8 @@ function renderCoursesInTable(courses: Course[]): void {
     coursesTbody.appendChild(trElement);
   });
 }
- 
-function renderStudent(student: Student): void{
+
+function renderStudent(student: Student): void {
   console.log('Desplegando estudiante');
   let h1element = document.createElement("h1");
   h1element.innerHTML = `${student.nombre}`;
@@ -57,9 +62,9 @@ function renderStudent(student: Student): void{
   studentTbody.appendChild(trElement);
 }
 
- 
 
-function applyFilterByName() { 
+
+function applyFilterByName() {
   let text = inputSearchBox.value;
   text = (text == null) ? '' : text;
   clearCoursesInTable();
@@ -67,8 +72,27 @@ function applyFilterByName() {
   renderCoursesInTable(coursesFiltered);
 }
 
+function filtrarPorCreditos() {
+  let min: any = minCredits.value;
+  let max: any = maxCredits.value;
+  clearCoursesInTable();
+  let coursesFiltered: Course[] = searchCoursesWithinCredits(min, max, dataCourses);
+  renderCoursesInTable(coursesFiltered);
+}
+
+function searchCoursesWithinCredits(min: number, max: number, courses: Course[]) {
+  let cursosARetornar: Course[] = [];
+  if (min <= max) {
+    cursosARetornar = courses.filter(function(courseX){
+      return courseX.credits>=min && courseX.credits<=max; 
+    });
+  }
+  return cursosARetornar;
+  
+}
+
 function searchCourseByName(nameKey: string, courses: Course[]) {
-  return nameKey === '' ? dataCourses : courses.filter( c => 
+  return nameKey === '' ? dataCourses : courses.filter(c =>
     c.name.match(nameKey));
 }
 
@@ -83,7 +107,7 @@ function clearCoursesInTable() {
   while (coursesTbody.hasChildNodes()) {
     if (coursesTbody.firstChild != null) {
       coursesTbody.removeChild(coursesTbody.firstChild);
-     
+
     }
   }
 }
